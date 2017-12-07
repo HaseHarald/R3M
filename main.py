@@ -12,8 +12,11 @@ except ValueError as val_err:
     print(val_err, file=sys.stderr)
     exit(1)
 
-mailer = Mailer(config)
+mailer = Mailer(config['SMTP'])
 mailer.connect()
-mailer.sendmail()
+maildata = config['Mail']
+for recipient in config['Recipients']:
+    maildata['to'] = config['Recipients'][recipient]['mail']
+    mailer.sendmail(maildata)
 mailer.disconnect()
 exit(0)
