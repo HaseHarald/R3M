@@ -1,0 +1,34 @@
+SMTP:
+    server: 'mail.example.com'
+    port: 587
+    starttls: True
+    user: 'imurdock'
+    password: 'LynnDebra'
+    
+Mail:
+    from: 'imurdock@example.com'
+    mark: '{{REPLACE}}'
+    subject: 'Sample-Mail'
+    template: >
+        This is a sample mail.
+        
+        You should write to {{REPLACE}}.
+        
+        Greetings and salutations
+        
+        
+        Ian Murdock
+    
+Recipients:
+    debra:
+        name: 'Debra Lynn'
+        mail: 'dlynn@debian.org'
+    rms:
+        name: 'Richard Stallman'
+        mail: 'rms@fsf.gnu'
+    linus:
+        name: 'Linus Torvalds'
+        mail: 'L.Torvalds@example.com'
+    eric:
+        name: 'Eric Raymond'
+        mail: 'Eric.R@Cathedral.bzr'
