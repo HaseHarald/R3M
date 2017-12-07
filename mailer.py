@@ -2,6 +2,7 @@
 
 import sys
 import smtplib
+from unidecode import unidecode
 
 # TODO: A hack of a lot more exceptionhandling!
 
@@ -26,7 +27,7 @@ class Mailer:
     def sendmail(self, maildata):
         message = 'From: ' + maildata['from'] + '\nSubject: ' + maildata['subject'] + '\n\n' + maildata['message']
         try:
-            self.server.sendmail(maildata['from'], maildata['to'], message)
+            self.server.sendmail(maildata['from'], maildata['to'], unidecode(message))
         except smtplib.SMTPServerDisconnected:
             print("No connection to SMTP server", file=sys.stderr)
             exit(2)

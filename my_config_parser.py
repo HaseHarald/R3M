@@ -19,8 +19,9 @@ class MyConfigParser(dict):
             },
             'Mail': {
                 'from': str,
+                'mark': str,
                 'subject': str,
-                'message': str
+                'template': str
             },
             'Recipients': {
                 # TODO: Make freely choosable keys possible

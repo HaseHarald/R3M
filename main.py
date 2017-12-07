@@ -44,7 +44,7 @@ maildata = config['Mail']
 partner_list = match_mail_recipients(config['Recipients'])
 for recipient in partner_list:
     maildata['to'] = partner_list[recipient]['mail']
-    maildata['message'] = partner_list[recipient]['name'] + " matches " + partner_list[recipient]['partner']
+    maildata['message'] = maildata['template'].replace(maildata['mark'], partner_list[recipient]['partner'])
     mailer.sendmail(maildata)
 mailer.disconnect()
 exit(0)
