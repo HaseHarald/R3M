@@ -15,8 +15,13 @@ class MyConfigParser(dict):
                 'port': int,
                 'starttls': bool,
                 'user': str,
-                'password': str,
-                'sender': str
+                'password': str
+            },
+            'Mail': {
+                'from': str,
+                'to': str,
+                'subject': str,
+                'message': str
             }
         }
         
