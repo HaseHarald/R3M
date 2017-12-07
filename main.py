@@ -31,20 +31,33 @@ def match_mail_recipients(recipients):
         
     return new_list
 
-try:
-    config = MyConfigParser("config/testconfig.yml")
-except ValueError as val_err:
-    print('Maleformed config file.', file=sys.stderr)
-    print(val_err, file=sys.stderr)
-    exit(1)
+def print_usage():
+    print(sys.argv[0], "matches mail partners.")
+    print("Usage:", sys.argv[0], "<config-file>")
+    print("See config folder for a sample config file")
 
-mailer = Mailer(config['SMTP'])
-mailer.connect()
-maildata = config['Mail']
-partner_list = match_mail_recipients(config['Recipients'])
-for recipient in partner_list:
-    maildata['to'] = partner_list[recipient]['mail']
-    maildata['message'] = maildata['template'].replace(maildata['mark'], partner_list[recipient]['partner'])
-    mailer.sendmail(maildata)
-mailer.disconnect()
-exit(0)
+if (__name__ == '__main__'):
+    
+    if len(sys.argv) == 2:
+        config_path = sys.argv[1]
+    else:
+        print_usage()
+        exit(1)
+    
+    try:
+        config = MyConfigParser(config_path)
+    except ValueError as val_err:
+        print('Maleformed config file.', file=sys.stderr)
+        print(val_err, file=sys.stderr)
+        exit(1)
+
+    mailer = Mailer(config['SMTP'])
+    mailer.connect()
+    maildata = config['Mail']
+    partner_list = match_mail_recipients(config['Recipients'])
+    for recipient in partner_list:
+        maildata['to'] = partner_list[recipient]['mail']
+        maildata['message'] = maildata['template'].replace(maildata['mark'], partner_list[recipient]['partner'])
+        mailer.sendmail(maildata)
+    mailer.disconnect()
+    exit(0)

@@ -1,4 +1,0 @@
-Python 3 Libs:
-- PyYAML
-- smtplib
-- unidecode
